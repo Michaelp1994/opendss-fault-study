@@ -1,5 +1,5 @@
 {
-  "name": "opends-fault-study",
+  "name": "opendss-fault-study",
   "version": "0.0.1",
   "description": "a package for designing fault studies using OpenDSS",
   "main": "./dist/index.js",
