@@ -7,7 +7,8 @@ export interface TransmissionTowerInterface {
   geometry: TowerGeometry;
 }
 
-export class TransmissionTower {
+export class TransmissionTower implements TransmissionTowerInterface {
+  _type = "TransmissionTower" as const;
   id: number;
   name: string;
   resistance: number;

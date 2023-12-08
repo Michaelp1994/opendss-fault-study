@@ -1,7 +1,10 @@
-import { Reactor, Vsource } from "opendss-node-interface";
+import { create } from "domain";
+import { Circuit, Reactor, Vsource } from "opendss-node-interface";
+import BaseFaultStudyComponent from "./BaseFaultStudyComponent.model";
 
-interface VoltageSourceInterface {
+export interface SubstationInterface {
   name: string;
+  reference?: boolean;
   phases?: number;
   voltage?: number;
   Isc1?: number;
@@ -12,10 +15,14 @@ interface VoltageSourceInterface {
   resistance?: number;
 }
 
-export class VoltageSource {
-  private _type = "VoltageSource" as const;
+export class Substation
+  extends BaseFaultStudyComponent
+  implements SubstationInterface
+{
+  _type = "Substation";
   id: number;
   name: string;
+  reference: boolean;
   phases?: number;
   voltage?: number;
   Isc1?: number;
@@ -26,9 +33,10 @@ export class VoltageSource {
   resistance?: number;
 
   constructor(
-    nameOrOptions: string | VoltageSourceInterface,
-    options?: Omit<VoltageSourceInterface, "name">
+    nameOrOptions: string | SubstationInterface,
+    options?: Omit<SubstationInterface, "name">
   ) {
+    super();
     if (typeof nameOrOptions === "string") {
       this.name = nameOrOptions;
       Object.assign(this, options);
@@ -48,7 +56,6 @@ export class VoltageSource {
       x1r1: this.x1r1,
       pu: 1.0,
     });
-
     const reactor = new Reactor(`${this.name}_RT`, {
       bus1: `B_${this.name}.4`,
       bus2: `B_${this.name}.0`,
@@ -56,7 +63,6 @@ export class VoltageSource {
       R: this.resistance,
       X: 0,
     });
-
     return [vSource, reactor];
   }
 }

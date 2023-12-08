@@ -1,4 +1,5 @@
 import { WireData } from "opendss-node-interface";
+import BaseFaultStudyComponent from "./BaseFaultStudyComponent.model";
 
 interface ConductorTypeInterface {
   name: string;
@@ -15,7 +16,11 @@ interface ConductorTypeInterface {
   gmr?: number;
 }
 
-export class ConductorType {
+export class ConductorType
+  extends BaseFaultStudyComponent
+  implements ConductorTypeInterface
+{
+  _type = "ConductorType" as const;
   id: number;
   name: string;
   surfaceArea?: number;
@@ -34,6 +39,7 @@ export class ConductorType {
     nameOrOptions: string | ConductorTypeInterface,
     options?: Omit<ConductorTypeInterface, "name">
   ) {
+    super();
     if (typeof nameOrOptions === "string") {
       this.name = nameOrOptions;
       Object.assign(this, options);
@@ -46,12 +52,12 @@ export class ConductorType {
     const wireData = new WireData({
       name: this.name,
       diam: this.outerDiameter,
-      radunits: "mm",
-      Rac: this.acResistance75,
-      Runits: "km",
-      Rdc: this.dcResistance25,
-      GMRac: this.gmr,
-      GMRunits: "mm",
+      radUnits: "mm",
+      rac: this.acResistance75,
+      rUnits: "km",
+      rdc: this.dcResistance25,
+      gmrac: this.gmr,
+      gmrUnits: "mm",
     });
     return wireData;
   }

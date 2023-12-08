@@ -1,16 +1,17 @@
 import {
-  BaseComponent,
+  BaseElement,
   Line,
   LineGeometry,
   Reactor,
 } from "opendss-node-interface";
+import BaseFaultStudyComponent from "./BaseFaultStudyComponent.model";
 import { Conductor, ConductorInterface } from "./Conductor.model";
+import { Substation } from "./Substation.model";
 import { TowerGeometry } from "./TowerGeometry.model";
 import {
   TransmissionTower,
   TransmissionTowerInterface,
 } from "./TransmissionTower.model";
-import { VoltageSource } from "./VoltageSource.model";
 
 interface TransmissionLineInterface {
   name: string;
@@ -20,13 +21,17 @@ interface TransmissionLineInterface {
   distance?: number;
   defaultTowerResistance?: number;
   defaultGeometry?: TowerGeometry;
-  fromSource?: VoltageSource;
-  toSource?: VoltageSource;
+  fromSource?: Substation;
+  toSource?: Substation;
   conductors?: ConductorInterface[];
   towers?: TransmissionTowerInterface[];
 }
 
-export class TransmissionLine {
+export class TransmissionLine
+  extends BaseFaultStudyComponent
+  implements TransmissionLineInterface
+{
+  _type = "TransmissionLine" as const;
   id: number;
   name: string;
   phases: number;
@@ -35,8 +40,8 @@ export class TransmissionLine {
   distance?: number;
   defaultTowerResistance?: number;
   defaultGeometry: TowerGeometry;
-  fromSource: VoltageSource;
-  toSource: VoltageSource;
+  fromSource: Substation;
+  toSource: Substation;
   conductors: Conductor[];
   towers: TransmissionTower[] = [];
 
@@ -44,6 +49,7 @@ export class TransmissionLine {
     nameOrOptions: string | TransmissionLineInterface,
     options?: Omit<TransmissionLineInterface, "name">
   ) {
+    super();
     if (typeof nameOrOptions === "string") {
       this.name = nameOrOptions;
       const optionsObj = options;
@@ -113,7 +119,7 @@ export class TransmissionLine {
   }
 
   create() {
-    const components: BaseComponent[] = this.createGeometries();
+    const components: BaseElement[] = this.createGeometries();
     const numConductors = this.conductors.length;
     const fromPhases = this.conductors.map(
       (transmissionLine) => transmissionLine.fromPhase
@@ -163,7 +169,7 @@ export class TransmissionLine {
             length: tower.distance,
             phases: this.distance,
             units: "m",
-            geometry: "line1_K1",
+            geometry: `${this.name}_${tower.geometry.name}`,
           })
         );
         components.push(
@@ -183,7 +189,7 @@ export class TransmissionLine {
               length: tower.distance,
               phases: this.distance,
               units: "m",
-              geometry: "line1_K1",
+              geometry: `${this.name}_${tower.geometry.name}`,
             })
           );
         }

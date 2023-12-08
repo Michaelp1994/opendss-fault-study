@@ -1,12 +1,15 @@
 import { ehs_5_16ths, linnet } from "../examples/conductorTypes";
 import { k1 } from "../examples/towerGeometries";
+
 import { FaultStudy } from "../models/FaultStudy";
+import { MainSubstation } from "../models/MainSubstation.model";
+import { Substation } from "../models/Substation.model";
 import { TransmissionLine } from "../models/TransmissionLine.model";
-import { VoltageSource } from "../models/VoltageSource.model";
-test("Create a Fault Study", () => {
-  const faultStudy = new FaultStudy("ESO-TOY", {});
 
-  const esoura = new VoltageSource("Esoura", {
+test("Create a Fault Study", async () => {
+  const study = new FaultStudy("EsouraToyotaStudy");
+
+  const esoura = new MainSubstation("Esoura", {
     phases: 3,
     Isc3: 1820,
     x1r1: 2.59,
@@ -17,9 +20,9 @@ test("Create a Fault Study", () => {
     resistance: 2,
   });
 
-  faultStudy.add(esoura);
+  study.addComponent(esoura);
 
-  const toyota = new VoltageSource("Toyota", {
+  const toyota = new Substation("Toyota", {
     phases: 3,
     Isc3: 1820,
     x1r1: 2.59,
@@ -29,13 +32,11 @@ test("Create a Fault Study", () => {
     frequency: 60,
     resistance: 2,
   });
-  faultStudy.add(toyota);
 
-  faultStudy.add(k1);
-
-  faultStudy.add(linnet);
-
-  faultStudy.add(ehs_5_16ths);
+  study.addComponent(toyota);
+  study.addComponent(k1);
+  study.addComponent(linnet);
+  study.addComponent(ehs_5_16ths);
 
   const line1 = new TransmissionLine("Line1", {
     phases: 8,
@@ -166,8 +167,7 @@ test("Create a Fault Study", () => {
     ],
   });
 
-  faultStudy.add(line1);
-  faultStudy.build();
-  faultStudy.circuit.saveScript("script.dss");
-  faultStudy.circuit.solve();
+  study.addComponent(line1);
+  study.buildCircuit();
+  study.solve();
 });

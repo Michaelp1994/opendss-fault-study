@@ -1,4 +1,5 @@
 import { LineSpacing } from "opendss-node-interface";
+import BaseFaultStudyComponent from "./BaseFaultStudyComponent.model";
 
 export interface ConductorLocationInterface {
   x: number;
@@ -11,7 +12,11 @@ interface TowerGeometryInterface {
   conductors?: ConductorLocationInterface[];
 }
 
-export class TowerGeometry {
+export class TowerGeometry
+  extends BaseFaultStudyComponent
+  implements TowerGeometryInterface
+{
+  _type = "TowerGeometry" as const;
   id: number;
   name: string;
   phases: number;
@@ -21,6 +26,7 @@ export class TowerGeometry {
     nameOrOptions: string | TowerGeometryInterface,
     options?: Omit<TowerGeometryInterface, "name">
   ) {
+    super();
     if (typeof nameOrOptions === "string") {
       this.name = nameOrOptions;
       Object.assign(this, options);
@@ -30,10 +36,9 @@ export class TowerGeometry {
   }
 
   create() {
-    const spacing = new LineSpacing({
-      name: this.name,
-      nconds: this.conductors.length,
-      nphases: this.conductors.length,
+    const spacing = new LineSpacing(this.name, {
+      nConds: this.conductors.length,
+      nPhases: this.conductors.length,
       x: this.conductors.map((conductor) => conductor.x),
       h: this.conductors.map((conductor) => conductor.y),
       units: "m",

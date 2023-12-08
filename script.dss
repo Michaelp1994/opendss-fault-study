@@ -1,32 +1,31 @@
-New Circuit.ESO-TOY
-New Vsource.Esoura bus1=B_Esoura basekv=138 pu=1 phases=3 x1r1=2.59 x0r0=3.46 Isc3=1820 Isc1=1070
+New Circuit.Esoura bus1=B_Esoura basekv=138 pu=1 phases=3 x1r1=2.59 x0r0=3.46 Isc3=1820 Isc1=1070
 New Reactor.Esoura_RT bus1=B_Esoura.4 bus2=B_Esoura.0 phases=1 R=2 X=0
 New Vsource.Toyota bus1=B_Toyota basekv=138 pu=1 phases=3 x1r1=2.59 x0r0=3.46 Isc3=1820 Isc1=1070
 New Reactor.Toyota_RT bus1=B_Toyota.4 bus2=B_Toyota.0 phases=1 R=2 X=0
-New LineSpacing.k1 nconds=8 nphases=8 x=[-3.15 -3.15 -3.15 3.15 3.15 3.15 -1.225 1.225]
+New LineSpacing.k1 nConds=8 nPhases=8 x=[-3.15 -3.15 -3.15 3.15 3.15 3.15 -1.225 1.225]
 ~ h=[14.08 17.74 21.4 14.08 17.74 21.4 23.23 23.23] units=m
-New WireData.Linnet Rdc=0.1736 Rac=0.2081 Runits=km GMRac=7.41 GMRunits=mm radunits=mm diam=18.29
-New WireData.ehs_5_16th Rac=5.25 Runits=km GMRac=4.6073483 GMRunits=mm radunits=mm diam=7.94
+New WireData.Linnet rdc=0.1736 rac=0.2081 rUnits=km gmrac=7.41 gmrUnits=mm radUnits=mm diam=18.29
+New WireData.ehs_5_16th rac=5.25 rUnits=km gmrac=4.6073483 gmrUnits=mm radUnits=mm diam=7.94
 New LineGeometry.Line1_k1 nconds=8 reduce=false spacing=k1
 ~ wires=[Linnet Linnet Linnet Linnet Linnet Linnet ehs_5_16th ehs_5_16th]
 New Line.Line1_s0 bus1=Esoura.1.2.3.1.2.3.4.4 bus2=Line1_T1 length=400 phases=8 geometry=Line1_k1 units=m
 New Reactor.Line1_T1_RT bus1=Line1_T1.7.8 bus2=Line1_T1.0.0 phases=2 R=15 X=0
-New Line.Line1_s1 bus1=Line1_T1 bus2=Line1_T2 length=400 geometry=line1_K1 units=m
+New Line.Line1_s1 bus1=Line1_T1 bus2=Line1_T2 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T2_RT bus1=Line1_T2.7.8 bus2=Line1_T2.0.0 phases=2 R=15 X=0
-New Line.Line1_s2 bus1=Line1_T2 bus2=Line1_T3 length=400 geometry=line1_K1 units=m
+New Line.Line1_s2 bus1=Line1_T2 bus2=Line1_T3 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T3_RT bus1=Line1_T3.7.8 bus2=Line1_T3.0.0 phases=2 R=15 X=0
-New Line.Line1_s3 bus1=Line1_T3 bus2=Line1_T4 length=400 geometry=line1_K1 units=m
+New Line.Line1_s3 bus1=Line1_T3 bus2=Line1_T4 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T4_RT bus1=Line1_T4.7.8 bus2=Line1_T4.0.0 phases=2 R=15 X=0
-New Line.Line1_s4 bus1=Line1_T4 bus2=Line1_T5 length=400 geometry=line1_K1 units=m
+New Line.Line1_s4 bus1=Line1_T4 bus2=Line1_T5 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T5_RT bus1=Line1_T5.7.8 bus2=Line1_T5.0.0 phases=2 R=15 X=0
-New Line.Line1_s5 bus1=Line1_T5 bus2=Line1_T6 length=400 geometry=line1_K1 units=m
+New Line.Line1_s5 bus1=Line1_T5 bus2=Line1_T6 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T6_RT bus1=Line1_T6.7.8 bus2=Line1_T6.0.0 phases=2 R=15 X=0
-New Line.Line1_s6 bus1=Line1_T6 bus2=Line1_T7 length=400 geometry=line1_K1 units=m
+New Line.Line1_s6 bus1=Line1_T6 bus2=Line1_T7 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T7_RT bus1=Line1_T7.7.8 bus2=Line1_T7.0.0 phases=2 R=15 X=0
-New Line.Line1_s7 bus1=Line1_T7 bus2=Line1_T8 length=400 geometry=line1_K1 units=m
+New Line.Line1_s7 bus1=Line1_T7 bus2=Line1_T8 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T8_RT bus1=Line1_T8.7.8 bus2=Line1_T8.0.0 phases=2 R=15 X=0
-New Line.Line1_s8 bus1=Line1_T8 bus2=Line1_T9 length=400 geometry=line1_K1 units=m
+New Line.Line1_s8 bus1=Line1_T8 bus2=Line1_T9 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T9_RT bus1=Line1_T9.7.8 bus2=Line1_T9.0.0 phases=2 R=15 X=0
-New Line.Line1_s9 bus1=Line1_T9 bus2=Line1_T10 length=400 geometry=line1_K1 units=m
+New Line.Line1_s9 bus1=Line1_T9 bus2=Line1_T10 length=400 geometry=Line1_k1 units=m
 New Reactor.Line1_T10_RT bus1=Line1_T10.7.8 bus2=Line1_T10.0.0 phases=2 R=15 X=0
-New Line.Line1_s10 bus1=Line1_T10 bus2=Toyota.1.2.3.1.2.3.4.4 length=400 geometry=line1_K1 units=m
+New Line.Line1_s10 bus1=Line1_T10 bus2=Toyota.1.2.3.1.2.3.4.4 length=400 geometry=Line1_k1 units=m

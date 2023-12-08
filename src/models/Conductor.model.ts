@@ -1,4 +1,3 @@
-import { BaseComponent } from "opendss-node-interface";
 import { ConductorType } from "./ConductorType.model";
 
 export interface ConductorInterface {
@@ -10,7 +9,8 @@ export interface ConductorInterface {
   type?: ConductorType;
 }
 
-export class Conductor {
+export class Conductor implements ConductorInterface {
+  _type = "Conductor" as const;
   id: number;
   name: string;
   fromPhase: number;
