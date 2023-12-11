@@ -5,3 +5,4 @@ export { Substation } from "./Substation.model";
 export { TowerGeometry } from "./TowerGeometry.model";
 export { TransmissionLine } from "./TransmissionLine.model";
 export { TransmissionTower } from "./TransmissionTower.model";
+export { MainSubstation } from "./MainSubstation.model";

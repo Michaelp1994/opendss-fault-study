@@ -1,12 +1,12 @@
 export {
   Conductor,
   ConductorType,
-  CurrentSource,
   FaultStudy,
   TowerGeometry,
   TransmissionLine,
   TransmissionTower,
-  VoltageSource,
+  Substation,
+  MainSubstation,
 } from "./models";
 
 export * as conductorTypes from "./examples/conductorTypes";
