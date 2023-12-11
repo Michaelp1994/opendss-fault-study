@@ -1,6 +1,6 @@
 {
   "name": "opendss-fault-study",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "a package for designing fault studies using OpenDSS",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
